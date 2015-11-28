@@ -1,0 +1,277 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.HelpSoft.gui;
+/**
+ *
+ * @author Laura Cristina Marin Velez Fecha: creada
+ * mayo SEPTIEMBRE/15/2015 esta es la clase se crea el formulario de menuP 
+ *
+ **/
+
+/**
+ * Libreria que se ocupa de la parte grafica de la ventana 
+ *
+ */
+import javax.swing.*;//Utilizar label, buttons...
+import java.awt.*;//Font, Color
+import java.awt.event.*;//Programa evento como click
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
+/**
+ * Se crea la clase de menuP con un JFrame(marco) y todos sus elementos
+ *
+ */
+
+
+public class menuP extends JFrame implements ActionListener, KeyListener {
+    
+    /**
+     * Declarar los objetos de Jlabel y JButton
+     **/
+
+//Declracion de los atributos
+
+    JLabel lblMensaje,lblMensaje1;//Creamos los nombres de los campos
+    JButton btCliente, btTecnico, btInfoPc, btBaseConocimiento, btUsuario, btRequerimiento,btVolver;//Creamos los botones
+    String ruta = "/com/imagenes/";// Creamos unas variables para guardar las imagenes
+    //Iconos
+    Icon icAceptar, icCancelar;// iconos para el boton cancelar y aceptar
+    Image icCabecera;//Imgen que aparece al lado del nombre de la ventana
+    
+     /**
+     * Se crea el constructor donde se le ponen todas las propiedades a los
+     * JLabel, JButton, JTextField...
+     **/
+
+    //Metodo Constructor
+    public menuP() {
+
+        setSize(700, 600);//Tamano del formulario
+        setTitle("Menu Principal");//Titulo de la ventana
+        setLocation(410, 85);//Ubicacion en pantalla
+        setResizable(true);//Prohibir agrandar la ventana
+        setVisible(true);//Visulizar el formulario
+
+        /**
+         * Se crea el tamaño y ubicacion de los JLabel que se declararon 
+        **/
+        
+        JLabel icFondo = new JLabel();//esto es para configurarlaimagen de fondo
+        icFondo.setIcon(new ImageIcon(getClass().getResource(ruta + "fondo1.jpg")));
+        icFondo.setBounds(01, 01,690, 550);
+        getContentPane().add(icFondo);
+
+        /*JLabel cabeza = new JLabel();
+        cabeza.setIcon(new ImageIcon(getClass().getResource(ruta + "Logo1.png")));
+        cabeza.setBounds(150, 0, 100, 510);
+        getContentPane().add(cabeza);*/
+
+        icCabecera = Toolkit.getDefaultToolkit().getImage(ruta + "ico_candado.png");
+        setIconImage(icCabecera);
+
+        getContentPane().setLayout(null);//Obtener area de trabajo y que el formulaario no se maneje como el quiere
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);//Cierra todo el proyecto al undir el boton x
+
+        lblMensaje = new JLabel("Atencion a requerimientos e ");
+        lblMensaje.setForeground(Color.BLUE);
+        lblMensaje.setFont(new Font("ARIAL", Font.PLAIN, 30));
+        lblMensaje.setBounds(100, 400, 600, 30); //posicion columna,fila,largo y ancho
+        getContentPane().add(lblMensaje);
+        lblMensaje.setVisible(true);
+        
+        lblMensaje1 = new JLabel("  insidentes de usuario");
+        lblMensaje1.setForeground(Color.BLUE);
+        lblMensaje1.setFont(new Font("ARIAL", Font.PLAIN, 30));
+        lblMensaje1.setBounds(100, 440, 600, 30); //posicion columna,fila,largo y ancho
+        getContentPane().add(lblMensaje1);
+        lblMensaje1.setVisible(true);
+
+        //BOTONES 
+         /**
+         * se crean los botones con sus dimensiones y ubicacion en la ventana
+         **/
+
+        //icAceptar = new ImageIcon(ruta + "Chulo.png");//Aparicion de iconos
+        btCliente = new JButton("Cliente", icAceptar);//nombre de el boton y icono
+        btCliente.setBounds(500, 205, 165, 31); //posicion columna,fila,largo y ancho
+        btCliente.addKeyListener(this);
+        btCliente.addActionListener(this);//Esta listo para escuchar evento
+        getContentPane().add(btCliente);
+
+        icCancelar = new ImageIcon(ruta + "Cancelar.png"); //Aparicion de iconos
+        btTecnico = new JButton("Tecnico", icCancelar);//nombre de el boton y icono
+        btTecnico.setBounds(500, 255, 165, 31); //posicion columna,fila,largo y ancho
+        btTecnico.addKeyListener(this);
+        btTecnico.addActionListener(this);//Esta listo para escuchar evento
+        getContentPane().add(btTecnico);
+
+        //icAceptar = new ImageIcon(ruta + "Chulo.png");//Aparicion de iconos
+        btInfoPc = new JButton("Informacio del PC", icAceptar);//nombre de el boton y icono
+        btInfoPc.setBounds(500, 305, 165, 31); //posicion columna,fila,largo y ancho
+        btInfoPc.addKeyListener(this);
+        btInfoPc.addActionListener(this);//Esta listo para escuchar evento
+        getContentPane().add(btInfoPc);
+
+        //icAceptar = new ImageIcon(ruta + "Chulo.png");//Aparicion de iconos
+        btBaseConocimiento = new JButton("Base del conocimiento", icAceptar);//nombre de el boton y icono
+        btBaseConocimiento.setBounds(500, 355, 165, 31); //posicion columna,fila,largo y ancho
+        btBaseConocimiento.addKeyListener(this);
+        btBaseConocimiento.addActionListener(this);//Esta listo para escuchar evento
+        getContentPane().add(btBaseConocimiento);
+
+        //icAceptar = new ImageIcon(ruta + "Chulo.png");//Aparicion de iconos
+        btUsuario = new JButton("Usuario", icAceptar);//nombre de el boton y icono
+        btUsuario.setBounds(500, 405, 165, 31); //posicion columna,fila,largo y ancho
+        btUsuario.addKeyListener(this);
+        btUsuario.addActionListener(this);//Esta listo para escuchar evento
+        getContentPane().add(btUsuario);
+
+
+        //icAceptar = new ImageIcon(ruta + "Chulo.png");//Aparicion de iconos
+        btRequerimiento = new JButton("Requerimientos", icAceptar);//nombre de el boton y icono
+        btRequerimiento.setBounds(500, 455,165, 31); //posicion columna,fila,largo y ancho
+        btRequerimiento.addKeyListener(this);
+        btRequerimiento.addActionListener(this);//Esta listo para escuchar evento
+        getContentPane().add(btRequerimiento);
+
+  
+        //icAceptar = new ImageIcon(ruta + "Chulo.png");//Aparicion de iconos
+        btVolver = new JButton("Volver", icAceptar);//nombre de el boton y icono
+        btVolver.setBounds(500, 505, 165, 31); //posicion columna,fila,largo y ancho
+        btVolver.addKeyListener(this);
+        btVolver.addActionListener(this);//Esta listo para escuchar evento
+        getContentPane().add(btVolver);
+
+
+        this.getContentPane().add(icFondo);
+
+        this.repaint();
+    }
+
+    public boolean validarDatos(String user, String pwd) {
+        boolean res = true;
+
+        if ((user.equals("")) || (pwd.equals(""))) {
+            res = false;
+            JOptionPane.showMessageDialog(null, "ingrese Usuario - contraseña");
+        }
+        return res;
+
+
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btVolver)//Es para Funcionar El Boton
+        {
+            dispose();//para ocultar la ventana
+                    Seguridad segu = new Seguridad();
+        }
+        if (e.getSource() == btCliente)//Es para Funcionar El Boton
+        {
+            dispose();//para ocultar la ventana
+                    cliente clien = new cliente();
+        }
+    }
+    /* public void actionPerformed(ActionEvent e) {
+     if (e.getSource() == btCancelar)//Es para Funcionar El Boton
+     {
+     System.exit(0);
+     }
+     if (e.getSource() == txUsuario) {
+     txUsuario.transferFocus();
+     }
+     if (e.getSource() == btAceptar)//Es para Funcionar El Boton
+     {
+     String mensage0 = "tienes que llenar Todos los campos";
+     Boolean Correcto = true;
+     if (txUsuario.getText().equals("")) {
+     mensage0 = mensage0 + "\n * Usuario";
+     Correcto = false;
+     }
+     if (txContrasena.getText().equals("")) {
+     mensage0 = mensage0 + "\n * Contrase\u00f1a";
+     Correcto = false;
+     }
+     if (Correcto) {
+     if (txUsuario.getText().equals("juan") && txContrasena.getText().equals("1003")) {
+     JOptionPane.showMessageDialog(null, "Bienvenido a HelpSoft");//para funcionar cuando el usuario o contrasena esten erroneos
+     dispose();//para ocultar la ventana
+     menuP menu = new menuP();
+     } else {
+     JOptionPane.showMessageDialog(null, "Usuario o Contrase\u00f1a Incorrectos ");
+     }
+     } else {
+     if (Correcto == false) {
+     JOptionPane.showMessageDialog(null, mensage0, "Datos Insuficientes ", JOptionPane.ERROR_MESSAGE);
+     }
+     }
+     }
+     }
+
+     public void keyPressed(KeyEvent e) {
+     char caracter = e.getKeyChar();
+     int numero = (int) (caracter);
+
+     if (e.getSource() == txUsuario) {
+     if (numero == 10)//Para la tecla enter
+     {
+     txContrasena.requestFocus();
+     }
+     }
+     if (e.getSource() == txContrasena) {
+     if (numero == 10)//para la tecla enter
+     {
+     btAceptar.requestFocus();
+     }
+     }
+
+     if (e.getSource() == btAceptar) {
+     if (numero == 10)//Para la tecla enter
+     {
+     if (e.getSource() == btAceptar)//Es para Funcionar El Boton
+     {
+     String mensage0 = "Tienes que llenar estos campos";
+     Boolean Correcto = true;
+     if (txUsuario.getText().equals("")) {
+     mensage0 = mensage0 + "\n * Usuario";
+     Correcto = false;
+     }
+     if (txContrasena.getText().equals("")) {
+     mensage0 = mensage0 + "\n * Contrasena";
+     Correcto = false;
+     }
+     if (Correcto) {
+     if (txUsuario.getText().equals("juan") && txContrasena.getText().equals("1003")) {
+     JOptionPane.showMessageDialog(null, "Bienvenido a HelpSoft");//para funcionar cuando el usuario o contraseï¿½a esten erroneos
+     dispose();//para ocultar la ventana
+     // MenuPrincipal menu = new MenuPrincipal();
+
+     } else {
+     JOptionPane.showMessageDialog(null, "Usuario o Contrasena Incorrectos ");
+     }
+     } else {
+     if (Correcto == false) {
+     JOptionPane.showMessageDialog(null, mensage0, "Datos Insuficientes ", JOptionPane.ERROR_MESSAGE);
+     }
+     }
+     }
+     }
+     }
+     }*/
+
+    public void keyPressed(KeyEvent e) {
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
+    public void keyReleased(KeyEvent e) {
+    }
+
+    /*public static void main(String[] args) {
+        new menuP();
+     }*/
+    
+}
