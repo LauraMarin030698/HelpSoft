@@ -281,3 +281,163 @@ public  class  cliente extends JFrame implements ActionListener,  KeyListener {
     	btSalir.addActionListener(this); //Esta listo para escuchar evento
         getContentPane().add(btSalir);
     	btSalir.setVisible(true);
+
+
+// TABLA
+        
+        Dtm = new DefaultTableModel(Datos, Columnas);// forma de la tabla
+        TablaDatos = new JTable(Dtm); // indican el modelo de la tabla
+        TablaDatos.setModel(Dtm);
+        TablaPanel = new JScrollPane(TablaDatos); //se agrega la tabla al panel con scroll
+        TablaPanel.setBounds(30, 300, 730, 200);
+        TablaPanel.setVisible(true);
+        this.getContentPane().add(TablaPanel);
+
+
+       this.getContentPane().add(icFondo);
+
+        this.repaint();
+        
+      
+              
+    }
+public void actionPerformed(ActionEvent e) {
+    
+ //BOTON SALIR
+        if (e.getSource() == btSalir) {
+            dispose();
+            Seguridad segu = new Seguridad();
+        }
+        
+         if (e.getSource() == btRegresar) {
+            dispose();
+            menuP menu = new menuP();
+        }
+        
+        
+        
+        //Boton Guardar
+    		if(e.getSource()==btGuardar)
+    	{
+    		if(txCedula.getText().equals("")|| txprimerNom.getText().equals("")||txsegundoNom.getText().equals("")||txprimerApe.getText().equals("")||txsegundoApe.getText().equals("")||txCorreo.getText().equals("")||txUbicacion.getText().equals("")||txextencioTel.getText().equals(""))
+
+			{
+				JOptionPane.showMessageDialog(null,"Los Campos Marcados con * Son Obligatorios");
+
+			}
+
+			else
+
+			{
+
+				if(DatosVerificados(txCedula.getText()))	{
+
+					JOptionPane.showMessageDialog(null,"El cliente ya existe");
+
+				}
+
+				else
+
+				{
+
+					Object Datos []= new Object[8];
+					Datos[0]=txCedula.getText();
+					Datos[1]=txprimerNom.getText();;
+					Datos[2]=txsegundoNom.getText();
+					Datos[3]=txprimerApe.getText();
+					Datos[4]=txsegundoApe.getText();
+					Datos[5]=txCorreo.getText();
+					Datos[6]=txUbicacion.getText();
+					Datos[7]=txextencioTel.getText();
+                                        
+		                        Dtm.addRow(Datos);    
+					TablaDatos=new JTable(Dtm);
+ 					JOptionPane.showMessageDialog(null,"Lo datos fueron guardados correctamente");
+ 					txCedula.setText("");
+    		txprimerNom.setText("");
+    		txsegundoNom.setText("");
+    		txprimerApe.setText("");
+    		txsegundoApe.setText("");
+       		txCorreo.setText("");
+    		txUbicacion.setText("");
+       		txextencioTel.setText("");
+    	   	         txCedula.requestFocus(true);
+
+				}
+
+
+			}
+
+		}
+        //BOTON BUSCAR 
+        if (e.getSource() == btBuscar) {
+            if (txCedula.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Ingrese cedula");
+            } else {
+                if (DatosVerificados(txCedula.getText())) {
+                    for (int i = 0; i < TablaDatos.getRowCount(); i++) {
+                        if (TablaDatos.getValueAt(i, 0).toString().equals(txCedula.getText())) {
+
+                            txCedula.setText(TablaDatos.getValueAt(i, 0).toString());
+                            txprimerNom.setText(TablaDatos.getValueAt(i, 1).toString());
+                            txsegundoNom.setText(TablaDatos.getValueAt(i, 2).toString());
+                            txprimerApe.setText(TablaDatos.getValueAt(i, 3).toString());                            
+                            txsegundoApe.setText(TablaDatos.getValueAt(i, 4).toString()); 
+                            txCorreo.setText(TablaDatos.getValueAt(i, 5).toString()); 
+                            txUbicacion.setText(TablaDatos.getValueAt(i, 6).toString());
+                            txextencioTel.setText(TablaDatos.getValueAt(i, 7).toString());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "La cedula no existe");
+                        }
+                    }
+                }
+            }
+        }
+        
+        	//BOTON LIMPIAR
+    	if(e.getSource()==btNuevo)
+    	{
+    		txCedula.setText("");
+    		txprimerNom.setText("");
+    		txsegundoNom.setText("");
+    		txprimerApe.setText("");
+    		txsegundoApe.setText("");
+       		txCorreo.setText("");
+    		txUbicacion.setText("");
+       		txextencioTel.setText("");
+    	}
+        
+        
+        
+        
+    }
+    public void keyTyped(KeyEvent e) {
+    }
+
+    
+    public void keyPressed(KeyEvent e) {
+    }
+
+    
+    public void keyReleased(KeyEvent e) {
+    }
+
+    public boolean DatosVerificados(String Cedula) {
+        boolean resp = false;
+
+        for (Integer i = 0; i < TablaDatos.getRowCount(); i++) {
+            if (TablaDatos.getValueAt(i, 0).toString().equals(Cedula)) {
+                resp = true;
+            }
+        }
+        return resp;
+    }
+
+   
+    public static void main(String[] args) {
+        new cliente();
+     }
+    
+    
+}
+ 
