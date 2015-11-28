@@ -1,0 +1,283 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.HelpSoft.gui;
+
+/**
+ *
+ * @author Laura Cristina Marin Velez Fecha: creada
+ * mayo SEPTIEMBRE/15/2015 esta es la clase se crea el formulario de cliente 
+ *
+ **/
+
+/**
+ * Libreria que se ocupa de la parte grafica de la ventana 
+ *
+ */
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ * Se crea la clase de Cliente con un JFrame(marco) y todos sus elementos
+ *
+ */
+
+public  class  cliente extends JFrame implements ActionListener,  KeyListener {
+    
+     /**
+     * Declarar los objetos de Jlabel, jtextfield, JTable, JscrolTableModel y
+     * JPanel
+    **/
+    
+    //Declaracion atributos
+    Integer pos;//Tipo entero
+    JLabel lblCedula, lblprimerNom, lblMensaje, lblsegundoNom,lblprimerApe,lblsegundoApe, lblCorreo,lblUbicacion,lblextencioTel, lblTitulo, lblPerfil;
+    JTextField txCedula,txprimerNom,txsegundoNom,txprimerApe,txsegundoApe,txUbicacion,txextencioTel,txCorreo;    
+    JButton btGuardar, btBuscar,btModificar,btRegresar, btNuevo , btSalir;//Botones
+    JTable TablaDatos; //crear tabla
+    DefaultTableModel Dtm; //Modelo tabla
+    JScrollPane TablaPanel; //panel para la tabla
+    JPanel PBotones;
+    //DateComboBox txFechaDeReg;
+    // DateComboBox  txFechaDeNaci;
+//   DateComboBox  txFechaDeIn;
+    int Numero;
+    char Caracter;
+    char caracter;
+    //titulos a las columnas
+    Object[] Columnas = {"Cedula", "PrimerNom", "SegundoNom", "PrimerApe", "SegundoApe","Correo","Ubicaion","ExtTelefono"};
+    Object[][] Datos = new Object[0][8];//Darle el tamaÃ±o a la matriz
+    //Iconos
+    JComboBox  cbEstado, cbPerfil;
+   Icon icGuardar,icBuscar,icModificar,icRegresar,icSalir, icNuevo;
+   String ruta = "/com/imagenes/";// Creamos unas variables para guardar las imagenes
+    
+        /**
+     * Se crea el constructor donde se le ponen todas las propiedades a los
+     * JLabel, JButton, JTextField...
+     **/
+
+    public cliente () {
+        
+        setSize(805, 600);//Tamano del formulario
+        setTitle("Cliente");//Titulo de la ventana
+        setLocation(450, 85);//Ubicacion en pantalla
+        setResizable(true);//Prohibir agrandar la ventana
+        setVisible(true);//Visulizar el formulario
+
+         /**
+         * Se crea el tamaño y ubicacion de los JLabel que se declararon y JTextField(cuadros de texto) que
+         * se declararon
+        **/
+        
+        JLabel icFondo = new JLabel();//esto es para configurarlaimagen de fondo
+        icFondo.setIcon(new ImageIcon(getClass().getResource(ruta + "fondo.jpg")));
+        icFondo.setBounds(01, 01,790, 558);
+        getContentPane().add(icFondo);
+    
+        getContentPane().setLayout(null);// Obtener area de trabajo y que no se mande por si solo
+        getContentPane().setBackground(new Color(183, 244, 186));//Color
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);//cierra todo el proyecto al salir con la X
+
+        lblMensaje = new JLabel("Los Campos Con * Son Obligtorios.");
+        lblMensaje.setForeground(Color.RED);
+        lblMensaje.setFont(new Font(" comic sans ms ", Font.PLAIN, 12));
+        lblMensaje.setBounds(100, 270, 300, 25); //posicion columna,fila,largo y ancho
+        getContentPane().add(lblMensaje);
+        lblMensaje.setVisible(true);
+    
+        lblTitulo = new JLabel(" CLIENTE ");
+        lblTitulo.setForeground(Color.BLACK);
+        lblTitulo.setFont(new Font(" comic sans ms ", Font.PLAIN, 18));
+        lblTitulo.setBounds(360, 20, 300, 20); //posicion columna,fila,largo y ancho
+        getContentPane().add(lblTitulo);
+        lblTitulo.setVisible(true);
+        
+        lblCedula = new JLabel(" *Cedula: ");
+        lblCedula.setForeground(Color.BLACK);
+        lblCedula.setFont(new Font(" comic sans ms ", Font.PLAIN, 18));
+        lblCedula.setBounds(40, 80, 200, 25); //posicion columna,fila,largo y ancho
+        getContentPane().add(lblCedula);
+        lblCedula.setVisible(true);
+        
+        txCedula = new JTextField("");
+        txCedula.setBounds(195, 80, 150, 25);
+        txCedula.addActionListener(this); //Esta listo para escuchar evento
+        txCedula.addKeyListener(this);
+        getContentPane().add(txCedula);
+        txCedula.setVisible(true);
+        
+        lblprimerNom = new JLabel(" *Primer nombre: ");
+        lblprimerNom.setForeground(Color.BLACK);
+        lblprimerNom.setFont(new Font(" comic sans ms ", Font.PLAIN, 18));
+        lblprimerNom.setBounds(40, 130, 200, 25); // posicion columna,fila,largo y ancho
+        getContentPane().add(lblprimerNom);
+        lblprimerNom.setVisible(true);
+        
+        txprimerNom = new JTextField("");
+        txprimerNom.setBounds(195, 130, 150, 25);//
+        txprimerNom.addActionListener(this); //Esta listo para escuchar evento
+        txprimerNom.addKeyListener(this);
+        getContentPane().add(txprimerNom);
+        txprimerNom.setVisible(true);
+        
+        lblsegundoNom = new JLabel(" *Segundo nombre: ");
+        lblsegundoNom.setForeground(Color.BLACK);
+        lblsegundoNom.setFont(new Font(" comic sans ms ", Font.PLAIN, 18));
+        lblsegundoNom.setBounds(40, 180,200, 25); // posicion columna,fila,largo y ancho
+        getContentPane().add(lblsegundoNom);
+        lblsegundoNom.setVisible(true);
+        
+        txsegundoNom = new JTextField("");
+        txsegundoNom.setBounds(195, 180, 150, 25);
+        txsegundoNom.addActionListener(this); //Esta listo para escuchar evento
+        txsegundoNom.addKeyListener(this);
+        getContentPane().add(txsegundoNom);
+        txsegundoNom.setVisible(true);
+        
+        lblprimerApe = new JLabel(" *Primer apellido: ");
+        lblprimerApe.setForeground(Color.BLACK);
+        lblprimerApe.setFont(new Font(" comic sans ms ", Font.PLAIN, 18));
+        lblprimerApe.setBounds(40, 230,150, 25); // posicion columna,fila,largo y ancho
+        getContentPane().add(lblprimerApe);
+        lblprimerApe.setVisible(true);
+        
+         txprimerApe = new JTextField("");
+        txprimerApe.setBounds(195,230 , 150, 25);//
+        txprimerApe.addActionListener(this); //Esta listo para escuchar evento
+        txprimerApe.addKeyListener(this);
+        getContentPane().add(txprimerApe);
+        txprimerApe.setVisible(true);
+       /* txFechaDeReg = new DateComboBox();
+        txFechaDeReg.setBounds(670, 130 , 150, 25);
+        txFechaDeReg.addActionListener(this); //Esta listo para escuchar evento
+        txFechaDeReg.addKeyListener(this);
+        getContentPane().add(txFechaDeReg);
+        txFechaDeReg.setVisible(true);*/
+        
+        lblsegundoApe = new JLabel(" *Segundo apellido : ");
+        lblsegundoApe.setForeground(Color.BLACK);
+        lblsegundoApe.setFont(new Font(" comic sans ms ", Font.PLAIN, 18));
+        lblsegundoApe.setBounds(350, 80, 200, 25); // posicion columna,fila,largo y ancho
+        getContentPane().add(lblsegundoApe);
+        lblsegundoApe.setVisible(true);
+        
+        txsegundoApe = new JTextField("");
+        txsegundoApe.setBounds(520, 80, 150, 25);//
+        txsegundoApe.addActionListener(this); //Esta listo para escuchar evento
+        txsegundoApe.addKeyListener(this);
+        getContentPane().add(txsegundoApe);
+        txsegundoApe.setVisible(true);
+        
+        lblCorreo = new JLabel(" *Correo electronico : ");
+        lblCorreo.setForeground(Color.BLACK);
+        lblCorreo.setFont(new Font(" comic sans ms ", Font.PLAIN, 18));
+        lblCorreo.setBounds(350, 130, 200, 25); // posicion columna,fila,largo y ancho
+        getContentPane().add(lblCorreo);
+        lblCorreo.setVisible(true);
+        
+        txCorreo = new JTextField("");
+        txCorreo.setBounds(520, 130 , 150, 25);//
+        txCorreo.addActionListener(this); //Esta listo para escuchar evento
+        txCorreo.addKeyListener(this);
+        getContentPane().add(txCorreo);
+        txCorreo.setVisible(true);
+        
+        lblUbicacion = new JLabel(" *Ubicacion : ");
+        lblUbicacion.setForeground(Color.BLACK);
+        lblUbicacion.setFont(new Font(" comic sans ms ", Font.PLAIN, 18));
+        lblUbicacion.setBounds(350, 180,200, 25); //posicion columna,fila,largo y ancho
+        getContentPane().add(lblUbicacion);
+        lblUbicacion.setVisible(true);
+        
+        txUbicacion = new JTextField("");
+        txUbicacion.setBounds(520, 180, 150, 25);
+        txUbicacion.addActionListener(this); //Esta listo para escuchar evento
+        txUbicacion.addKeyListener(this);
+        getContentPane().add(txUbicacion);
+        txUbicacion.setVisible(true);
+        
+  
+        lblextencioTel = new JLabel(" *Extension telefonica : ");
+        lblextencioTel.setForeground(Color.BLACK);
+        lblextencioTel.setFont(new Font(" comic sans ms ", Font.PLAIN, 18));
+        lblextencioTel.setBounds(350, 230,150, 25); //posicion columna,fila,largo y ancho
+        getContentPane().add(lblextencioTel);
+        lblextencioTel.setVisible(true);
+        
+         txextencioTel = new JTextField("");
+        txextencioTel.setBounds(520,230 , 150, 25);
+        txextencioTel.addActionListener(this); //Esta listo para escuchar evento
+        txextencioTel.addKeyListener(this);
+        getContentPane().add(txextencioTel);
+        txextencioTel.setVisible(true);
+         // Creacion del JComboBox y anadir los items.
+       
+        
+        //BOTONES 
+         /**
+         * se crean los botones con sus dimensiones y ubicacion en la ventana
+         **/
+       
+        icGuardar= new ImageIcon("icGuardar.png"); //Aparicion de iconos
+    	btGuardar = new JButton("Guardar",icGuardar);
+        btGuardar.setBounds(30,510,100,40);
+    	btGuardar.addActionListener(this); //Esta listo para escuchar evento
+        getContentPane().add(btGuardar);
+        btGuardar.setVisible(true);
+               
+        icBuscar= new ImageIcon("icBuscar.png"); //Aparicion de iconos
+    	btBuscar = new JButton("Consultar",icBuscar);
+        btBuscar.setBounds(150,510,100,40);
+    	btBuscar.addActionListener(this); //Esta listo para escuchar evento
+        getContentPane().add(btBuscar);
+        btBuscar.setVisible(true);
+        
+        icModificar= new ImageIcon("icModificar.png"); //Aparicion de iconos
+    	btModificar = new JButton("Modificar",icModificar);
+        btModificar.setBounds(270,510,100,40);
+    	btModificar.addActionListener(this); //Esta listo para escuchar evento
+        getContentPane().add(btModificar);
+        btModificar.setVisible(true);
+        
+        icNuevo= new ImageIcon("iclimpiar.png"); //Aparicion de iconos
+    	btNuevo = new JButton("Limpiar",icNuevo);
+        btNuevo.setBounds(390,510,100,40);
+    	btNuevo.addActionListener(this); //Esta listo para escuchar evento
+        getContentPane().add(btNuevo);
+        btNuevo.setVisible(true);
+        
+              
+        icRegresar= new ImageIcon("icRegresar.png"); //Aparicion de iconos
+    	btRegresar = new JButton("Regresar",icRegresar);
+        btRegresar.setBounds(520,510,100,40);
+    	btRegresar.addActionListener(this); //Esta listo para escuchar evento
+        getContentPane().add(btRegresar);
+        btRegresar.setVisible(true);
+        
+        icSalir= new ImageIcon("icSalir.png"); //Aparicion de iconos
+    	btSalir= new JButton("Cerrar Sesion",icSalir);
+        btSalir.setBounds(640,510,130,40);
+    	btSalir.addActionListener(this); //Esta listo para escuchar evento
+        getContentPane().add(btSalir);
+    	btSalir.setVisible(true);
