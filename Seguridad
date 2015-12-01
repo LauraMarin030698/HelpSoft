@@ -1,0 +1,121 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.HelpSoft.gui;
+/**
+ *
+ * @author Laura Cristina Marin Velez Fecha: creada
+ * mayo SEPTIEMBRE/15/2015 esta es la clase se crea el formulario de seguridad 
+ *
+ **/
+
+/**
+ * Libreria que se ocupa de la parte grafica de la ventana 
+ *
+ */
+import javax.swing.*;//Utilizar label, buttons...
+import java.awt.*;//Font, Color
+import java.awt.event.*;//Programa evento como click
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
+/**
+ * Se crea la clase de Seguridad con un JFrame(marco) y todos sus elementos
+ *
+ */
+
+public class Seguridad extends JFrame implements ActionListener, KeyListener {
+    
+      /**
+     * Declarar los objetos de Jlabel, jtextfield y JButton 
+    **/
+    
+    JLabel lblUsuario, lblContrasena, lblImagen;//Creamos los nombres de los campos
+    JTextField txUsuario, txContrasena;//cremos las cajas de texto
+    JButton btAceptar, btCancelar;//Creamos los botones
+    String ruta = "/com/imagenes/";// Creamos unas variables para guardar las imagenes
+     //Iconos
+    Icon icAceptar, icCancelar;// iconos para el boton cancelar y aceptar
+    Image icCabecera    ;//Imgen que aparece al lado del nombre de la ventana
+    
+        /**
+     * Se crea el constructor donde se le ponen todas las propiedades a los
+     * JLabel, JButton, JTextField...
+     **/
+    
+    //Metodo Constructor
+    public Seguridad() {
+       
+        setSize(450, 250);//Tamano del formulario
+        setTitle("Inicio de Sesión");//Titulo de la ventana
+        setLocation(450, 200);//Ubicacion en pantalla
+        setResizable(false);//Prohibir agrandar la ventana
+        setVisible(true);//Visulizar el formulario
+        
+         /**
+         * Se crea el tamaño y ubicacion de los JLabel que se declararon y JTextField(cuadros de texto) que
+         * se declararon
+        **/
+        
+        JLabel icFondo = new JLabel();//esto es para configurarlaimagen de fondo
+        icFondo.setIcon(new ImageIcon(getClass().getResource(ruta + "fondo.jpg")));
+        icFondo.setBounds(01, 01, 800, 200);
+        getContentPane().add(icFondo);
+        
+        JLabel cabeza = new JLabel();
+        cabeza. setIcon(new ImageIcon(getClass(). getResource(ruta + "logo.jpg")));
+        cabeza. setBounds(10,0,100,200);
+	getContentPane().add(cabeza);    
+        
+        icCabecera = Toolkit.getDefaultToolkit().getImage(ruta + "ico_candado.png");
+        setIconImage(icCabecera);
+        
+        getContentPane().setLayout(null);//Obtener area de trabajo y que el formulaario no se maneje como el quiere
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);//Cierra todo el proyecto al undir el boton x
+
+        lblUsuario = new JLabel("Usuario:");
+        lblUsuario.setForeground(Color.BLACK);
+        lblUsuario.setFont(new Font("ARIAL", Font.PLAIN, 14));
+        lblUsuario.setBounds(120, 50, 200, 20); //posicion columna,fila,largo y ancho
+        getContentPane().add(lblUsuario);
+        lblUsuario.setVisible(true);
+
+        lblContrasena = new JLabel(" Contrase\u00f1a: ");
+        lblContrasena.setForeground(Color.BLACK);
+        lblContrasena.setFont(new Font(" ARIAL ", Font.PLAIN, 14));
+        lblContrasena.setBounds(120, 110, 200, 20); //posicion columna,fila,largo y ancho
+        getContentPane().add(lblContrasena);
+        lblContrasena.setVisible(true);
+
+        txUsuario = new JTextField("");
+        txUsuario.setBounds(220, 50, 200, 20); //posicion columna,fila,largo y ancho
+        txUsuario.addKeyListener(this); //Esta listo para escuchar evento
+        getContentPane().add(txUsuario);
+
+        txContrasena = new JPasswordField("");
+        txContrasena.setBounds(220, 110, 200, 20); //posicion columna,fila,largo y ancho
+        txContrasena.addKeyListener(this); //Esta listo para escuchar evento
+        getContentPane().add(txContrasena);
+
+            /**
+         * se crean los botones con sus dimensiones y ubicacion en la ventana
+         **/
+        
+        icAceptar = new ImageIcon(ruta + "Chulo.png");//Aparicion de iconos
+        btAceptar = new JButton("Aceptar", icAceptar);//nombre de el boton y icono
+        btAceptar.setBounds(120, 160, 120, 31); //posicion columna,fila,largo y ancho
+        btAceptar.addKeyListener(this);
+        btAceptar.addActionListener(this);//Esta listo para escuchar evento
+        getContentPane().add(btAceptar);
+
+        icCancelar = new ImageIcon(ruta + "Cancelar.png"); //Aparicion de iconos
+        btCancelar = new JButton("Cancelar", icCancelar);//nombre de el boton y icono
+        btCancelar.setBounds(250, 160, 120, 31); //posicion columna,fila,largo y ancho
+        btCancelar.addKeyListener(this);
+        btCancelar.addActionListener(this);//Esta listo para escuchar evento
+        getContentPane().add(btCancelar);
+
+        this.getContentPane().add(icFondo);       
+
+        this.repaint();
+    }
